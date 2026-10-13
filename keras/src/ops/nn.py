@@ -194,7 +194,9 @@ class Softsign(Operation):
         return backend.ops.nn.softsign(x)
 
     def compute_output_spec(self, x):
-        return KerasTensor(x.shape, dtype=x.dtype)
+        return KerasTensor(
+            x.shape, dtype=dtypes.promote_to_float_dtype(x.dtype)
+        )
 
 
 @keras_export(["keras.ops.softsign", "keras.ops.nn.softsign"])
@@ -356,7 +358,9 @@ class Squareplus(Operation):
         return _squareplus(x, self.b)
 
     def compute_output_spec(self, x):
-        return KerasTensor(x.shape, dtype=x.dtype)
+        return KerasTensor(
+            x.shape, dtype=dtypes.promote_to_float_dtype(x.dtype)
+        )
 
 
 @keras_export(["keras.ops.squareplus", "keras.ops.nn.squareplus"])
@@ -861,7 +865,9 @@ class HardShrink(Operation):
         return backend.ops.nn.hard_shrink(x, self.threshold)
 
     def compute_output_spec(self, x):
-        return KerasTensor(x.shape, dtype=x.dtype)
+        return KerasTensor(
+            x.shape, dtype=dtypes.promote_to_float_dtype(x.dtype)
+        )
 
 
 @keras_export(["keras.ops.hard_shrink", "keras.ops.nn.hard_shrink"])

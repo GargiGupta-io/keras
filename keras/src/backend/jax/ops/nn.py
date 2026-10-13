@@ -72,6 +72,9 @@ def softplus(x):
 
 def softsign(x):
     x = convert_to_tensor(x)
+    float_dtype = dtypes.promote_to_float_dtype(x.dtype)
+    if float_dtype != backend.standardize_dtype(x.dtype):
+        x = cast(x, float_dtype)
     return jnn.soft_sign(x)
 
 
@@ -96,6 +99,9 @@ def silu(x):
 
 def squareplus(x, b=4):
     x = convert_to_tensor(x)
+    float_dtype = dtypes.promote_to_float_dtype(x.dtype)
+    if float_dtype != backend.standardize_dtype(x.dtype):
+        x = cast(x, float_dtype)
     return jnn.squareplus(x, b=b)
 
 
@@ -165,6 +171,9 @@ def hard_tanh(x):
 
 def hard_shrink(x, threshold=0.5):
     x = convert_to_tensor(x)
+    float_dtype = dtypes.promote_to_float_dtype(x.dtype)
+    if float_dtype != backend.standardize_dtype(x.dtype):
+        x = cast(x, float_dtype)
     return jnp.where(jnp.abs(x) > threshold, x, 0.0)
 
 
